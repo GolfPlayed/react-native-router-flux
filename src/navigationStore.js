@@ -69,6 +69,8 @@ const reservedKeys = [
   'title',
   'drawerOpen',
   'drawerClose',
+  'rightDrawerOpen',
+  'rightDrawerClose',
 ];
 
 const dontInheritKeys = [
@@ -564,7 +566,7 @@ class NavigationStore {
     this.currentParams = state.params;
     this._currentParams = state.params;
 
-    if (currentScene !== this.currentScene && this.currentScene !== 'DrawerOpen' && this.currentScene !== 'DrawerClose') {
+    if (currentScene !== this.currentScene && this.currentScene !== 'DrawerOpen' && this.currentScene !== 'DrawerClose' && this.currentScene !== 'RightDrawerOpen' && this.currentScene !== 'RightDrawerClose') {
       this.dispatch({ type: ActionConst.BLUR, routeName: currentScene });
 
       // call onExit handler
@@ -623,6 +625,14 @@ class NavigationStore {
   jump = (routeName, data) => {
     const params = filterParam(data);
     this.dispatch({ type: ActionConst.JUMP, routeName, params });
+  };
+
+  rightDrawerOpen = () => {
+    this.dispatch(NavigationActions.navigate({ routeName: 'RightDrawerOpen' }));
+  };
+
+  rightDrawerClose = () => {
+    this.dispatch(NavigationActions.navigate({ routeName: 'RightDrawerClose' }));
   };
 
   drawerOpen = () => {

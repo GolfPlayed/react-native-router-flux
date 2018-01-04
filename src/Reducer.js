@@ -37,6 +37,13 @@ export function reducer(state = navigationStore.state, action) {
         return navigationStore.router.getStateForAction(NavigationActions.navigate({ routeName: 'DrawerClose' }), state);
       }
     }
+    if (activeState.routeName === 'RightDrawerOpen') {
+      activeState = getActiveStateExceptDrawer(state);
+      // just close drawer if no active route change
+      if (isActiveRoute(state, routeName)) {
+        return navigationStore.router.getStateForAction(NavigationActions.navigate({ routeName: 'RightDrawerClose' }), state);
+      }
+    }
     // skip jumping if route is already active
     if (isActiveRoute(state, routeName)) {
       return state;

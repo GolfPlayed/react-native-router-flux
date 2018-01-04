@@ -6,6 +6,9 @@ export function getActiveStateExceptDrawer(param) {
   if (state.routes[state.index].routeName === 'DrawerOpen') {
     return getActiveState(state.routes[0]);
   }
+  if (state.routes[state.index].routeName === 'RightDrawerOpen') {
+    return getActiveState(state.routes[0]);
+  }
   return getActiveState(state.routes[state.index]);
 }
 
@@ -17,6 +20,9 @@ export function isActiveRoute(state, routeName) {
     return state.routeName === routeName;
   }
   if (state.routes[state.index].routeName === 'DrawerOpen') {
+    return isActiveRoute(state.routes[0], routeName);
+  }
+  if (state.routes[state.index].routeName === 'RightDrawerOpen') {
     return isActiveRoute(state.routes[0], routeName);
   }
   return isActiveRoute(state.routes[state.index], routeName);
